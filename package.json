@@ -2,7 +2,9 @@
   "name": "Pickapp",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "firebase": "~2.2.9"
+  },
   "devDependencies": {
     "grunt-steroids": "1.x"
   }
