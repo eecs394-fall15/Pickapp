@@ -5,10 +5,27 @@
      Pickapp
     </super-navbar-title>
   </super-navbar>
- <map center="current-location" zoom="12">
-    <info-window position="current-location" visible="true">
+<!--  <map center="" zoom="12">
+    <info-window position="current-location" visible="true" id="bar">
       <span>Event markers to be added.</span>
-      <marker position="42.058403, -87.673652" title="Click to zoom"></marker>
+   
     </info-window>
-  </map>
+	   <marker position="42.058403, -87.673652" title="Click to zoom"  on-click="showInfoWindow(event, 'bar')"></marker>
+  </map> -->
+  
+  <map center="current-location" zoom="14">
+  <marker id="mark1" position="42.058403, -87.673652" on-click="showInfoWindow(event, 'bar')">
+  </marker>
+  <info-window id="bar" max-width="200" visible-on-marker="mark1">
+    <div ng-non-bindable="">
+      <div id="siteNotice"></div>
+      <h3 id="firstHeading" class="firstHeading">Northwestern University</h3>
+      <div id="bodyContent">
+        <p><b>Frances Searle Building</b>
+        Soccer@4.00pm</p>
+     
+      </div>
+    </div>
+  </info-window>
+</map>
 </div>

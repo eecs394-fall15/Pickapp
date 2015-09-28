@@ -1,6 +1,8 @@
 angular.
 	module('example')
 	.controller('GettingStartedController', function($scope, supersonic){
+		
+		
 		// $scope.pickupGameName = "NU pickup Soccer";
 		// var pickupGame = supersonic.data.model('PickupGame');
 		// var object = {
@@ -34,4 +36,6 @@ angular.
 	    //   map.panTo(e.latLng);
 	    // }
 	  });
+	  
+	  
 	});
