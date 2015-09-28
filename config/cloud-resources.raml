@@ -16,8 +16,8 @@ traits:
             default: 80018
   
 schemas:
-  - Game_collection: '{"$schema":"http://json-schema.org/schema","title":"Game collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Game representation","properties":{"Sport":{"type":"string"},"Location":{"type":"string"},"Time":{"type":"string"}},"required":[]}}}}'
-  - Game_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Game representation","properties":{"object":{"type":"object","properties":{"Sport":{"type":"string"},"Location":{"type":"string"},"Time":{"type":"string"}},"required":[]}}}'
+  - Game_collection: '{"$schema":"http://json-schema.org/schema","title":"Game collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Game representation","properties":{"Sport":{"type":"string"},"Time":{"type":"string"},"Lat":{"type":"string"},"Lng":{"type":"string"}},"required":[]}}}}'
+  - Game_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical Game representation","properties":{"object":{"type":"object","properties":{"Sport":{"type":"string"},"Time":{"type":"string"},"Lat":{"type":"string"},"Lng":{"type":"string"}},"required":[]}}}'
 
 resourceTypes:
   - dolan_db_collection:
