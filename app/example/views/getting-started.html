@@ -8,49 +8,49 @@
 <!--  <map center="" zoom="12">
     <info-window position="current-location" visible="true" id="bar">
       <span>Event markers to be added.</span>
-   
+
     </info-window>
 	   <marker position="42.058403, -87.673652" title="Click to zoom"  on-click="showInfoWindow(event, 'bar')"></marker>
   </map> -->
-  
+
   <map center="current-location" zoom="15">
-  <marker id="mark1" position="42.058403, -87.673652" on-click="showInfoWindow(event, 'bar')">
+  <!-- <marker id="mark1" position="42.058403, -87.673652" on-click="showInfoWindow(event, 'bar')">
   </marker>
 
-    <marker id="mark3" position="42.053576, -87.672727" on-click="showInfoWindow(event, 'bar2')">
+    <marker id="mark2" position="42.053576, -87.672727" on-click="showInfoWindow(event, 'bar2')">
   </marker>
-    <marker id="mark4" position="42.053855, -87.676488" on-click="showInfoWindow(event, 'bar3')">
+    <marker id="mark3" position="42.053855, -87.676488" on-click="showInfoWindow(event, 'bar3')">
   </marker>
   <info-window id="bar" max-width="200" visible-on-marker="mark1">
     <div ng-non-bindable="">
       <div id="siteNotice"></div>
 
       <div id="bodyContent">
-        <p><b>Frances Searle Building</b>
-        Soccer@4.00pm</p>
+        <b>Soccer</b> <br>4:00pm
       </div>
     </div>
   </info-window>
-    
-      <info-window id="bar2" max-width="200" visible-on-marker="mark3">
+
+      <info-window id="bar2" max-width="200" visible-on-marker="mark2">
     <div ng-non-bindable="">
       <div id="siteNotice"></div>
-      
+
       <div id="bodyContent">
-        <p><b>Norris</b>
-        Air Hockey@8.00pm</p>
+        <b>Air Hockey</b> <br>8:00pm
       </div>
     </div>
   </info-window>
-       <info-window id="bar3" max-width="100" visible-on-marker="mark4">
+       <info-window id="bar3" max-width="100" visible-on-marker="mark3">
     <div ng-non-bindable="">
       <div id="siteNotice"></div>
-      
+
       <div id="bodyContent">
-        <p><b>Kellogg</b>
-        Football@5.00pm</p>
+        <b>Football</b><br>5:00pm
       </div>
     </div>
-  </info-window>
+  </info-window> -->
 </map>
+<br>
+<br>
+<button ng-click="loadData()">Load New Data</button>
 </div>
