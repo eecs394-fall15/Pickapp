@@ -8,7 +8,7 @@ angular.
 			gamesData.findAll().then(function(games){
 				for (var i =2; i < games.length; i++){
 					currentGame = games[i];
-					var contentString = '<b>' + currentGame.Sport + '</b> <br>' + currentGame.Time + '<br><a href="settings.html">RSVP</a>'
+					var contentString = '<b>' + currentGame.Sport + '</b> <br>' + currentGame.Time + '<br><a class="hrefstyle" href="rsvp.html">RSVP</a>'
 					var contentWindow = new google.maps.InfoWindow({
 						content: contentString
 					});
