@@ -8,8 +8,8 @@ angular.
 			gamesData.findAll().then(function(games){
 				for (var i =2; i < games.length; i++){
 					currentGame = games[i];
-					var contentString = "<b>" + currentGame.Sport + "</b> <br> " + currentGame.Time;
-					var contentWindow = new google.maps.InfoWindow({
+					var contentString = "<b>" + currentGame.Sport + "</b> <br> " + currentGame.Time + "<br><button ng-click='rsvpevent()'>RSVP</button>"
+					var contentWindow = new google.maps.InfoWindow({\""
 						content: contentString
 					});
 					var gameLocation = new google.maps.LatLng(parseFloat(currentGame.Lat), parseFloat(currentGame.Lng));
@@ -23,7 +23,17 @@ angular.
 				map.panTo(gameLocation);
 			})
 		});
+$scope.rsvpevent = function()
+{
 
+var modalView = new supersonic.ui.View("example#settings");
+var options = {
+  animate: true
+}
+supersonic.ui.modal.show(modalView, options);
+	
+	
+}
 
 		$scope.loadData = function(){
 			var firstGame;
@@ -32,7 +42,7 @@ angular.
 
 				for (var i =0; i < 2; i++){
 					currentGame = games[i];
-					var contentString = "<b>" + currentGame.Sport + "</b> <br> " + currentGame.Time;
+					var contentString = "<b>" + currentGame.Sport + "</b> <br> " + currentGame.Time ;
 					var contentWindow = new google.maps.InfoWindow({
 						content: contentString
 					});

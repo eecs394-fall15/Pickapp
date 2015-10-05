@@ -21,6 +21,7 @@
   <% _.each(yield.modules, function(module) { %>
   <script src="/app/<%= module %>.js"></script>
   <% }); %>
+
 </head>
 <body ng-app="<%= yield.moduleName %>">
 
