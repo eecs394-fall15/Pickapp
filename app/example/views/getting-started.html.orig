@@ -1,17 +1,17 @@
 <div class="padding" ng-controller="GettingStartedController">
-    <script>
-  document.addEventListener("touchmove", function(e){
-    e.preventDefault();
-  });
-</script>
 
   <super-navbar>
 
 
 	<super-navbar-title>
+<<<<<<< Updated upstream
+ PickApp
+    </super-navb1ar-title>
+=======
 
     PickApp
   </super-navbar-title>
+>>>>>>> Stashed changes
 	<a class="button button-outline icon-right super-navicon button-balanced"></a>
 
 
@@ -31,4 +31,9 @@
 
   </map>
 </map>
+<<<<<<< Updated upstream
+<br>
+<br>
+=======
+>>>>>>> Stashed changes
 </div>
