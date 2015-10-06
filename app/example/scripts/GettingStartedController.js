@@ -53,6 +53,7 @@ angular.
 		};
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
 			if($scope.placeGame){
+					$scope.placeGame = false;
 					var marker = new google.maps.Marker({
 						position: latLng,
 						animation: google.maps.Animation.DROP,
@@ -62,7 +63,7 @@ angular.
 					var contentString = "<div id='content'> <h2>Create new event</h2>" +
 						" Time: <input></input><br>" +
 						"Sport: <input> </input><br>" +
-						"  Cap: <input> </input><br>" +
+						"  Cap: <input> </input><br><br>" +
 						"<button ng-click='submitNewEvent()'>Submit</button>";
 
 					var infowindow = new google.maps.InfoWindow({

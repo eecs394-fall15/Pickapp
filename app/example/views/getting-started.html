@@ -11,10 +11,14 @@
 	<super-navbar-title>
     PickApp
   </super-navbar-title>
-	<a class="button button-outline icon-right super-navicon button-balanced"></a>
-
-
+	<a class="button button-outline super-navicon button-balanced"></a>
   </super-navbar>
+
+  <div class="onoffswitch" style="float: right;">
+      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="placeGame">
+      <label class="onoffswitch-label" for="myonoffswitch"></label>
+  </div>
+  <p style="float: right;"> Create new game </p>
 
   <map center="current-location" style="height: 80vh;" zoom="15">
     <marker ng-repeat="game in loadedGames" id="{{game.MarkerId}}" position="{{game.Position}}" on-click="showInfoWindow('myInfoWindow')"/>
@@ -31,9 +35,5 @@
     </marker>
   </map>
 
-  <div class="onoffswitch" style="float: right;">
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="placeGame">
-      <label class="onoffswitch-label" for="myonoffswitch"></label>
-  </div>
-  <p style="float: right;"> Create new game </p>
+
 </div>
