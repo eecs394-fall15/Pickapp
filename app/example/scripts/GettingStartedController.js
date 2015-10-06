@@ -4,11 +4,15 @@ angular.
 		var gamesData = supersonic.data.model('Game');
 		var map;
 		var loadedGames;
-		var testLocation = new google.maps.LatLng(42.074156, -87.683960);
-		$scope.loadedGames = [{Position: "42.074156, -87.683960", Sport: 'Blah', Time: 'Blah o clock', MarkerID: 0}];
+		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
+		$scope.loadedGames = [];
+		$scope.placeGame = false;
 		$scope.$on('mapInitialized', function(evt, evtMap) {
 			map = evtMap;
 			map.panTo(testLocation);
+			map.addListener('click', function(e) {
+			   $scope.placeMarkerAndPanTo(e.latLng, map);
+			 });
 			$scope.loadData();
 		});
 		$scope.rsvpevent = function()
@@ -45,6 +49,28 @@ angular.
 
 			});
 
-			console.log('working');
+		};
+		$scope.placeMarkerAndPanTo = function(latLng, map) {
+			if($scope.placeGame){
+					var marker = new google.maps.Marker({
+						position: latLng,
+						animation: google.maps.Animation.DROP,
+						map: map
+					});
+					map.panTo(latLng);
+					var contentString = "<div id='content'> <h2>Create new event</h2>" +
+						" Time: <input></input><br>" +
+						"Sport: <input> </input><br>" +
+						"  Cap: <input> </input><br>" +
+						"<button ng-click='submitNewEvent()'>Submit</button>";
+
+					var infowindow = new google.maps.InfoWindow({
+						content: contentString
+					});
+					infowindow.open(map, marker);
+				}
+		};
+		$scope.submitNewEvent = function(){
+
 		};
 	});
