@@ -25,6 +25,7 @@
    text-decoration: none;
    vertical-align: middle;
    }
+<<<<<<< HEAD
 .hrefstyle:hover {
    border-top-color: #28597a;
    background: #28597a;
@@ -67,3 +68,6 @@
    .onoffswitch-checkbox:checked + .onoffswitch-label:before {
        right: 0px;
    }
+=======
+
+>>>>>>> origin/master

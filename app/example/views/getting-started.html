@@ -17,16 +17,15 @@
   </super-navbar>
 
   <map center="current-location" style="height: 80vh;" zoom="15">
-    <marker ng-repeat="game in loadedGames" id="{{game.MarkerId}}" position="{{game.Position}}" on-click="showInfoWindow('myInfoWindow')">
-      <info-window id="myInfoWindow" max-width="200">
-        <div ng-non-bindable="">
-          <div id="siteNotice"></div>
-          <div id="bodyContent">
-            <p>
-              <b>{{game.Sport}}</b> <br> {{game.Time}}
-            </p>
-          </div>
-          <button ng-click="clicked(game.MarkerID)"> RSVP </button>
+    <marker ng-repeat="game in loadedGames" id="{{game.MarkerId}}" position="{{game.Position}}" on-click="showInfoWindow('myInfoWindow')"/>
+    <info-window id="myInfoWindow" max-width="200">
+    <div ng-non-bindable="">
+      <div id="siteNotice"></div>
+      <div id="bodyContent">
+        <p>
+          <b>{{game.Sport}}</b> <br> {{game.Time}}</p>
+        <br>
+        <button class="rsvpbutton" ng-click="rsvpevent()">RSVP</button>
         </div>
       </info-window>
     </marker>

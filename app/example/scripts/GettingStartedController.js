@@ -18,12 +18,13 @@ angular.
 		$scope.rsvpevent = function()
 			{
 
-				var modalView = new supersonic.ui.View("example#settings");
+				var modalView = new supersonic.ui.View("example#rsvp");
 				var options = {
 					animate: true
 				};
 				supersonic.ui.modal.show(modalView, options);
 			};
+
 
 		$scope.loadData = function()
 			{
