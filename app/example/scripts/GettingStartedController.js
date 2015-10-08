@@ -1,6 +1,6 @@
 angular.
 	module('example')
-	.controller('GettingStartedController', function($scope, supersonic){
+	.controller('GettingStartedController', function($scope, supersonic, $compile){
 		var gamesData = supersonic.data.model('Game');
 		var map;
 		var loadedGames;
@@ -61,18 +61,36 @@ angular.
 					});
 					map.panTo(latLng);
 					var contentString = "<div id='content'> <h2>Create new event</h2>" +
-						" Time: <input></input><br>" +
-						"Sport: <input> </input><br>" +
-						"  Cap: <input> </input><br><br>" +
-						"<button ng-click='submitNewEvent()'>Submit</button>";
-
+						"<form novalidate class='simple-form'>" +
+						" Time: <input ng-model='game.time'></input><br>" +
+						"Sport: <input ng-model='game.sport' class='sport-selector'> </input><br>" +
+						"  Min: <input ng-model='game.min' style='width: 10%;'></input>" +
+						"  Max: <input ng-model='game.max' style='width: 10%;'></input><br><br>" +
+						"<input type='submit' ng-click='submitNewEvent(game)'></button>" +
+						"</form>";
+					var compiledContent = $compile(contentString)($scope);
 					var infowindow = new google.maps.InfoWindow({
-						content: contentString
+						content: compiledContent[0]
 					});
+					var Sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee'];
 					infowindow.open(map, marker);
+					$('.sport-selector').autocomplete({
+						source: Sports,
+						minLength: 0,
+						scroll: true
+					}).focus(function() {
+						$(this).autocomplete("search", "");
+					});
 				}
 		};
-		$scope.submitNewEvent = function(){
-
+		$scope.submitNewEvent = function(game){
+			var gameObject = {
+				Time: game.time,
+				Sport: game.sport
+			}
+			var newGame = new gamesData(gameObject);
+			newGame.save().then(function(){
+				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
+			});
 		};
 	});

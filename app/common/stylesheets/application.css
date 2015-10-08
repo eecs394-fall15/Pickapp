@@ -35,13 +35,13 @@
    background: #1b435e;
    }
 
-   .onoffswitch {
-       position: relative; width: 60px;
-       -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-   }
-   .onoffswitch-checkbox {
-       display: none;
-   }
+.onoffswitch {
+    position: relative; width: 60px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
    .onoffswitch-label {
        display: block; overflow: hidden; cursor: pointer;
        height: 36px; padding: 0; line-height: 36px;
@@ -67,3 +67,7 @@
    .onoffswitch-checkbox:checked + .onoffswitch-label:before {
        right: 0px;
    }
+
+  .sport-selector {
+    width: 40%;
+  }
