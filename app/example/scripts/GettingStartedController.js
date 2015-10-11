@@ -11,8 +11,8 @@ angular.
 			map = evtMap;
 			map.panTo(testLocation);
 			map.addListener('click', function(e) {
-			   $scope.placeMarkerAndPanTo(e.latLng, map);
-			 });
+				$scope.placeMarkerAndPanTo(e.latLng, map);
+			});
 			$scope.loadData();
 		});
 		$scope.rsvpevent = function()
@@ -60,6 +60,9 @@ angular.
 						map: map
 					});
 					map.panTo(latLng);
+					$scope.game = {};
+					$scope.game.lat = latLng.J.toString();
+					$scope.game.lng = latLng.M.toString();
 					var contentString = "<div id='content'> <h2>Create new event</h2>" +
 						"<form novalidate class='simple-form'>" +
 						" Time: <input ng-model='game.time'></input><br>" +
@@ -84,10 +87,14 @@ angular.
 				}
 		};
 		$scope.submitNewEvent = function(game){
+
+			if (!$scope.$$phase) $scope.$apply();
 			var gameObject = {
+				Lat: game.lat,
+				Lng: game.lng,
 				Time: game.time,
 				Sport: game.sport
-			}
+			};
 			var newGame = new gamesData(gameObject);
 			newGame.save().then(function(){
 				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
