@@ -1,6 +1,6 @@
 angular.
 	module('example')
-	.controller('GettingStartedController', function($scope, supersonic, $compile){
+	.controller('JoinGameController', function($scope, supersonic, $compile){
 		var gamesData = supersonic.data.model('Game');
 		var map;
 		var loadedGames;

@@ -27,21 +27,15 @@ tab-bar {
 tab-bar tab-bar-item {
   color: #b0b1b4;
   font-family: "Avenir";
-  font-size: 10px;
+  font-size: 15px;
 }
 
 tab-bar tab-bar-item:selected {
   color: #1596f7;
 }
 
-tab-bar-item#settings {
-  background-image: url(icons/cog.svg);
-}
 
 tab-bar-item#index {
-  background-image: url(icons/home.svg);
 }
 
-tab-bar-item#internet {
-  background-image: url(icons/search.svg);
-}
+
