@@ -24,10 +24,10 @@
           </div>
           <div id="bodyContent">
             <p>
-              <b>{{game.Sport}}</b> <br> {{game.Time}}
+              <b>{{game.Sport}}</b> <br> {{game.Time}}<br>{{game.MarkerId}}
             </p>
             <br>
-            <button class="rsvpbutton" ng-click="rsvpevent()">RSVP</button>
+            <button class="rsvpbutton" ng-click="rsvpevent(game.EventID)">RSVP</button>
             </div>
           </div>
       </info-window>

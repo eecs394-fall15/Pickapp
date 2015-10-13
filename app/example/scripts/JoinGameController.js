@@ -15,9 +15,9 @@ angular.
 			});
 			$scope.loadData();
 		});
-		$scope.rsvpevent = function()
+		$scope.rsvpevent = function(id)
 			{
-
+				window.localStorage.setItem("event_id",id);
 				var modalView = new supersonic.ui.View("example#rsvp");
 				var options = {
 					animate: true
@@ -28,28 +28,27 @@ angular.
 
 		$scope.loadData = function()
 			{
-
 			var firstGame;
 			var contentWindows = [];
 			gamesData.findAll().then(function(games){
 				loadedGames = games;
-
 				for (var i =0; i < games.length; i++){
 					var currentGame = games[i];
 					var currentLocation = currentGame.Lat + ", " + currentGame.Lng;
 					var currentSport = currentGame.Sport;
 					var currentTime = currentGame.Time;
+					//supersonic.logger.log(currentGame.Event_ID);
 					$scope.loadedGames.push({
 						Position : currentLocation,
 						Sport: currentSport,
 						Time: currentTime,
+						Eventid : currentGame.Event_ID,
 						MarkerID: i + 1
+
 					});
 				}
 				$scope.$apply();
-
 			});
-
 		};
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
 			if($scope.placeGame){
