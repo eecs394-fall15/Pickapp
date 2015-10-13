@@ -8,7 +8,7 @@ angular.
 		var options = {
 			animate: true
 		};
-		supersonic.ui.modal.show(modalView, options);
+		supersonic.ui.modal.hide();
 	};
 
 	$scope.toHome = function()
@@ -17,7 +17,7 @@ angular.
 		var options = {
 			animate: true
 		};
-		supersonic.ui.modal.show(modalView, options);
+		supersonic.ui.modal.hide();
 	};
 
 

@@ -1,64 +1,30 @@
 angular.
 	module('example')
-	.controller('GettingStartedController', function($scope, supersonic, $compile){
+	.controller('CreateGameController', function($scope, supersonic, $compile){
 		var gamesData = supersonic.data.model('Game');
 		var map;
 		var loadedGames;
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
+		var markers = [];
 		$scope.loadedGames = [];
-		$scope.placeGame = false;
+		$scope.placeGame = true;
 		$scope.$on('mapInitialized', function(evt, evtMap) {
 			map = evtMap;
 			map.panTo(testLocation);
 			map.addListener('click', function(e) {
 				$scope.placeMarkerAndPanTo(e.latLng, map);
 			});
-			$scope.loadData();
 		});
-		$scope.rsvpevent = function()
-			{
-
-				var modalView = new supersonic.ui.View("example#rsvp");
-				var options = {
-					animate: true
-				};
-				supersonic.ui.modal.show(modalView, options);
-			};
-
-
-		$scope.loadData = function()
-			{
-
-			var firstGame;
-			var contentWindows = [];
-			gamesData.findAll().then(function(games){
-				loadedGames = games;
-
-				for (var i =0; i < games.length; i++){
-					var currentGame = games[i];
-					var currentLocation = currentGame.Lat + ", " + currentGame.Lng;
-					var currentSport = currentGame.Sport;
-					var currentTime = currentGame.Time;
-					$scope.loadedGames.push({
-						Position : currentLocation,
-						Sport: currentSport,
-						Time: currentTime,
-						MarkerID: i + 1
-					});
-				}
-				$scope.$apply();
-
-			});
-
-		};
+		
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
-			if($scope.placeGame){
+			if(true){
 					$scope.placeGame = false;
 					var marker = new google.maps.Marker({
 						position: latLng,
 						animation: google.maps.Animation.DROP,
 						map: map
 					});
+
 					map.panTo(latLng);
 					$scope.game = {};
 					$scope.game.lat = latLng.J.toString();
@@ -79,6 +45,9 @@ angular.
 					var infowindow = new google.maps.InfoWindow({
 						content: compiledContent[0]
 					});
+
+
+
 					var Sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee'];
 					infowindow.open(map, marker);
 					$('.sport-selector').autocomplete({
@@ -103,10 +72,11 @@ angular.
 			var newGame = new gamesData(gameObject);
 			newGame.save().then(function(){
 				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
-			});
-
-			
+			});	
 		};
+
+
+
 		$scope.openSidebar = function(){
 			supersonic.ui.drawers.open('left').then( function(){
 				console.log('Opened drawers');
