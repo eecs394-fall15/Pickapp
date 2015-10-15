@@ -1,17 +1,33 @@
 angular.
 	module('example')
 	.controller('RSVPController', function($scope, supersonic, $compile){
+		$scope.rsvp = {};
+		var EventId=window.localStorage.getItem("event_id");
+		var rsvpData = supersonic.data.model('RSVPDetails');
 
-	var EventId=window.localStorage.getItem("event_id");
 
-	$scope.submitrsvp = function()
+	$scope.submitrsvp = function(rsvp)
 	{
-		var modalView = new supersonic.ui.View("example#getting-started");
-		var options = {
-			animate: true
+		var rsvpObject = {
+			Event_ID: parseInt(EventId),
+			Guest_Count:parseInt(rsvp.guest),
+			Phone_No: parseInt(rsvp.phone),
+			Comments: rsvp.comment
 		};
-		supersonic.ui.modal.hide();
+		var RsvpDet = new rsvpData(rsvpObject);
+		RsvpDet.save().then(function(){
+
+
+			supersonic.ui.modal.hide();
+
+
+		});
+
 	};
+
+
+
+
 
 	$scope.toHome = function()
 	{
