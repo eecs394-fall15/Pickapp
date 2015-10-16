@@ -15,6 +15,31 @@ angular.
 			});
 			$scope.loadData();
 		});
+		$scope.getURL = function(sport) 
+		{
+			var url;
+			switch(sport) {
+				case "Ultimate Frisbee":
+				case "Frisbee":
+					url = "/icons/frisbee.png";
+					break;
+				case "Soccer":
+					url = "/icons/soccer.png";
+					break;
+				case "Football":
+					url = "/icons/football.png";
+					break;
+				case "Basketball":
+					url = "/icons/basketball.png";
+					break;
+				default:
+					url = "/icons/default.png";
+
+			}
+
+			return url;
+			
+		};
 		$scope.rsvpevent = function(id)
 			{
 				window.localStorage.setItem("event_id",id);
