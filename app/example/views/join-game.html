@@ -17,8 +17,8 @@
 
 
   <map center="current-location" style="height: 100vh;" zoom="15" disable-default-u-i="true" zoom-control="true">
-    <marker ng-repeat="game in loadedGames" id="{{game.MarkerId}}" position="{{game.Position}}" on-click="showInfoWindow('myInfoWindow')"/>
-      <info-window id="myInfoWindow" max-width="200" icon="{{getURL(game.Sport)}}">
+    <marker ng-repeat="game in loadedGames" id="{{game.MarkerId}}" position="{{game.Position}}" on-click="showInfoWindow('myInfoWindow')" icon="{{getURL(game.Sport)}}"/>
+      <info-window id="myInfoWindow" max-width="200">
         <div ng-non-bindable="">
           <div id="siteNotice">
           </div>
