@@ -16,9 +16,15 @@ angular.
 		};
 		var RsvpDet = new rsvpData(rsvpObject);
 		RsvpDet.save().then(function(){
+			var options = {
+				message: "You have RSVPd Successfully",
+				buttonLabel: "Close"
+			};
 
+			supersonic.ui.dialog.alert("Success!", options).then(function() {
+				supersonic.ui.modal.hide();
+			});
 
-			supersonic.ui.modal.hide();
 
 
 		});
