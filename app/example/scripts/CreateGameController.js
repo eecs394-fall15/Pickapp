@@ -15,9 +15,9 @@ angular.
 				$scope.placeMarkerAndPanTo(e.latLng, map);
 			});
 		});
-		
+
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
-			if(true){
+			if($scope.placeGame){
 					$scope.placeGame = false;
 					var marker = new google.maps.Marker({
 						position: latLng,
@@ -27,8 +27,8 @@ angular.
 
 					map.panTo(latLng);
 					$scope.game = {};
-					$scope.game.lat = latLng.J.toString();
-					$scope.game.lng = latLng.M.toString();
+					$scope.game.lat = latLng.lat();
+					$scope.game.lng = latLng.lng();
 					var contentString = "<div id='content'> <h2>Create new event</h2>" +
 						"<form novalidate class='simple-form'>" +
 						//" Time: <div class=input-group bootstrap-timepicker>'
@@ -57,9 +57,16 @@ angular.
 					}).focus(function() {
 						$(this).autocomplete("search", "");
 					});
+
+					google.maps.event.addListener(infowindow, 'closeclick', function(){
+						$scope.placeGame = true;
+						marker.setVisible(false);
+					});
 					// $('#timepicker1').`timepicker();
 				}
 		};
+
+
 		$scope.submitNewEvent = function(game){
 
 			if (!$scope.$$phase) $scope.$apply();
@@ -72,7 +79,7 @@ angular.
 			var newGame = new gamesData(gameObject);
 			newGame.save().then(function(){
 				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
-			});	
+			});
 		};
 
 
