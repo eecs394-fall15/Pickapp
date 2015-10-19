@@ -2,11 +2,14 @@ angular.
 	module('example')
 	.controller('CreateGameController', function($scope, supersonic, $compile){
 		var gamesData = supersonic.data.model('Game');
-		gamesData.findAll().then(function(games){$scope.numGames = games.length});
+		gamesData.findAll().then(function(games){$scope.numGames = games.length;});
 		var map;
+		console.log(device.cordova);
 		var loadedGames;
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
 		var markers = [];
+		var infowindow;
+		var marker;
 		$scope.placeGame = true;
 		$scope.$on('mapInitialized', function(evt, evtMap) {
 			map = evtMap;
@@ -20,7 +23,7 @@ angular.
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
 			if($scope.placeGame){
 					$scope.placeGame = false;
-					var marker = new google.maps.Marker({
+					marker = new google.maps.Marker({
 						position: latLng,
 						animation: google.maps.Animation.DROP,
 						map: map
@@ -43,7 +46,7 @@ angular.
 						"<input type='submit' ng-click='submitNewEvent(game)'></button>" +
 						"</form>";
 					var compiledContent = $compile(contentString)($scope);
-					var infowindow = new google.maps.InfoWindow({
+					infowindow = new google.maps.InfoWindow({
 						content: compiledContent[0]
 					});
 
@@ -61,7 +64,7 @@ angular.
 
 					google.maps.event.addListener(infowindow, 'closeclick', function(){
 						$scope.placeGame = true;
-						marker.setVisible(false);
+						marker.setMap(null);
 					});
 					// $('#timepicker1').`timepicker();
 				}
@@ -71,7 +74,9 @@ angular.
 		$scope.submitNewEvent = function(game){
 
 			if (!$scope.$$phase) $scope.$apply();
+			var uuid = device.uuid;
 			var gameObject = {
+				Creator_ID: uuid,
 				Event_ID: 1000 + 1 + $scope.numGames,
 				Lat: game.lat,
 				Lng: game.lng,
@@ -84,7 +89,9 @@ angular.
 			newGame.save().then(function(){
 				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
 			});
-			
+			infowindow.close();
+			$scope.placeGame = true;
+			marker.setMap(null);
 		};
 
 
