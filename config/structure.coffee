@@ -5,16 +5,17 @@ module.exports =
   # See styling options for tabs and other native components in app/common/native-styles/ios.css or app/common/native-styles/android.css
   tabs: [
     {
+      title: "Join Game"
+      id: "pick game"
+      location: "example#join-game" # Supersonic module#view type navigation
+    }
+
+    {
       title: "Create Game"
       id: "index"
       location: "example#create-game" # Supersonic module#view type navigation
     }
 
-    {
-      title: "Join Game"
-      id: "pick game"
-      location: "example#join-game" # Supersonic module#view type navigation
-    }
 
   ]
 

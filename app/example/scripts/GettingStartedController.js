@@ -92,7 +92,6 @@ angular.
 					}).focus(function() {
 						$(this).autocomplete("search", "");
 					});
-					// $('#timepicker1').`timepicker();
 				}
 		};
 		$scope.submitNewEvent = function(game){

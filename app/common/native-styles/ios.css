@@ -22,13 +22,13 @@ navigation-bar button, navigation-bar back-bar-button {
 tab-bar {
   background-color: #ffffff;
   border-top: 1px #d8d8d8 solid;
-}
+   }
 
 tab-bar tab-bar-item {
   color: #b0b1b4;
   font-family: "Avenir";
   font-size: 20px;
-  background-color: green;
+
 }
 
 tab-bar tab-bar-item:selected {
@@ -36,7 +36,5 @@ tab-bar tab-bar-item:selected {
 }
 
 
-tab-bar-item#index {
-}
 
 
