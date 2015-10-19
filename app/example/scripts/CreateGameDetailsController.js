@@ -1,12 +1,12 @@
 angular.
 	module('example')
-	.controller('CreateGameController', function($scope, supersonic, $compile){
+	.controller('CreateGameDetailsController', function($scope, supersonic, $compile){
 		var gamesData = supersonic.data.model('Game');
-		gamesData.findAll().then(function(games){$scope.numGames = games.length});
 		var map;
 		var loadedGames;
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
 		var markers = [];
+		$scope.loadedGames = [];
 		$scope.placeGame = true;
 		$scope.$on('mapInitialized', function(evt, evtMap) {
 			map = evtMap;
@@ -15,11 +15,10 @@ angular.
 				$scope.placeMarkerAndPanTo(e.latLng, map);
 			});
 		});
-
-
+		
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
-			if($scope.placeGame){
-					$scope.placeGame = false;
+			if(true){
+					$scope.placeGame = true;
 					var marker = new google.maps.Marker({
 						position: latLng,
 						animation: google.maps.Animation.DROP,
@@ -28,26 +27,24 @@ angular.
 
 					map.panTo(latLng);
 					$scope.game = {};
-					$scope.game.lat = latLng.lat();
-					$scope.game.lng = latLng.lng();
+					$scope.game.lat = latLng.J.toString();
+					$scope.game.lng = latLng.M.toString();
 					var contentString = "<div id='content'> <h2>Create new event</h2>" +
 						"<form novalidate class='simple-form'>" +
 						//" Time: <div class=input-group bootstrap-timepicker>'
 						//			<input id = 'timepicker1' type='text' class='form-control input-small'>
 					//				<span class='input-group-addon'><i class='glyphicon glyphicon-time'></i></span>
 					//			</div>" +
-						"   Time: <input ng-model='game.time'></input>" +
-						//"Sport: <input ng-model='game.sport' class='sport-selector'> </input><br>" +
-						"   Sport: <input ng-model='game.sport'></input>" +
-						"   Max: <input ng-model='game.max'></input><br><br>" +
+						"  Time: <input ng-model='game.min'></input>" +
+						"Sport: <input ng-model='game.sport' class='sport-selector'> </input><br>" +
+						"  Min: <input ng-model='game.min' style='width: 10%;'></input>" +
+						"  Max: <input ng-model='game.max' style='width: 10%;'></input><br><br>" +
 						"<input type='submit' ng-click='submitNewEvent(game)'></button>" +
 						"</form>";
 					var compiledContent = $compile(contentString)($scope);
 					var infowindow = new google.maps.InfoWindow({
 						content: compiledContent[0]
 					});
-
-
 
 					var Sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee'];
 					infowindow.open(map, marker);
@@ -58,33 +55,22 @@ angular.
 					}).focus(function() {
 						$(this).autocomplete("search", "");
 					});
-
-					google.maps.event.addListener(infowindow, 'closeclick', function(){
-						$scope.placeGame = true;
-						marker.setVisible(false);
-					});
 					// $('#timepicker1').`timepicker();
 				}
 		};
-
-
 		$scope.submitNewEvent = function(game){
 
 			if (!$scope.$$phase) $scope.$apply();
 			var gameObject = {
-				Event_ID: 1000 + 1 + $scope.numGames,
 				Lat: game.lat,
 				Lng: game.lng,
-				Max_Allowed: game.max,
-				RSVP_Count: 1,
 				Time: game.time,
 				Sport: game.sport
 			};
 			var newGame = new gamesData(gameObject);
 			newGame.save().then(function(){
 				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
-			});
-			
+			});	
 		};
 
 

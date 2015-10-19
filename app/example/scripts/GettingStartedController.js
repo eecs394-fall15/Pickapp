@@ -65,8 +65,8 @@ angular.
 					});
 					map.panTo(latLng);
 					$scope.game = {};
-					$scope.game.lat = latLng.J.toString();
-					$scope.game.lng = latLng.M.toString();
+					$scope.game.lat = latLng.lat();
+					$scope.game.lng = latLng.lng();
 					var contentString = "<div id='content'> <h2>Create new event</h2>" +
 						"<form novalidate class='simple-form'>" +
 						//" Time: <div class=input-group bootstrap-timepicker>'
@@ -109,7 +109,7 @@ angular.
 				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
 			});
 
-			
+
 		};
 		$scope.openSidebar = function(){
 			supersonic.ui.drawers.open('left').then( function(){
