@@ -67,6 +67,8 @@ angular.
 						Position : currentLocation,
 						Sport: currentSport,
 						Time: currentTime,
+						Max : currentGame.Max_Allowed,
+						Count : currentGame.RSVP_Count,
 						Eventid : currentGame.Event_ID,
 						MarkerID: i + 1
 
