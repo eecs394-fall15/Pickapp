@@ -49,10 +49,18 @@ angular.
 				};
 				supersonic.ui.modal.show(modalView, options);
 			};
-
+		$scope.cancelevent = function(id)
+		{
+			window.localStorage.setItem("event_id",id);
+			var modalView = new supersonic.ui.View("example#cancel");
+			var options = {
+				animate: true
+			};
+			supersonic.ui.modal.show(modalView, options);
+		};
 
 		$scope.loadData = function()
-			{
+		{
 			var firstGame;
 			var contentWindows = [];
 			gamesData.findAll().then(function(games){

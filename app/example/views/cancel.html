@@ -1,0 +1,20 @@
+<div class="padding" ng-controller="CancelController">
+    <super-navbar>
+        <super-navbar-button ng-click="toHome()">
+            Back
+        </super-navbar-button>
+
+        <super-navbar-title>
+            Cancel Event
+        </super-navbar-title>
+    </super-navbar>
+
+    <div class="list">
+
+        <label class="item item-input">
+            <textarea  placeholder="Reason for Cancelling Evenet"></textarea>
+        </label>
+    </div>
+    <button ng-click="submitcancel()">Confirm Cancellation</button>
+
+</div>
