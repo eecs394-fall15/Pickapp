@@ -35,15 +35,10 @@ angular.
 					$scope.game.lng = latLng.lng();
 					var contentString = "<div id='content'> <h2>Create new event</h2>" +
 						"<form novalidate class='simple-form'>" +
-						//" Time: <div class=input-group bootstrap-timepicker>'
-						//			<input id = 'timepicker1' type='text' class='form-control input-small'>
-					//				<span class='input-group-addon'><i class='glyphicon glyphicon-time'></i></span>
-					//			</div>" +
-						"   Time: <input ng-model='game.time'></input>" +
-						//"Sport: <input ng-model='game.sport' class='sport-selector'> </input><br>" +
-						"   Sport: <input ng-model='game.sport'></input>" +
-						"   Max: <input ng-model='game.max'></input><br><br>" +
-						"<input type='submit' ng-click='submitNewEvent(game)'></button>" +
+						"   Time: <input type='time' ng-model='game.time' placeholder='HH:mm:ss' required></input><br>" +
+						"  Sport: <input ng-model='game.sport' required></input> <br>" +
+						"    Max: <input ng-model='game.max' required width='40%'></input>Players <br><br>" +
+						"<input type='submit' ng-click='submitNewEvent(game)'></input>" +
 						"</form>";
 					var compiledContent = $compile(contentString)($scope);
 					infowindow = new google.maps.InfoWindow({
@@ -66,7 +61,10 @@ angular.
 						$scope.placeGame = true;
 						marker.setMap(null);
 					});
-					// $('#timepicker1').`timepicker();
+
+					marker.addListener('click', function(){
+						infowindow.open(map, marker);
+					});
 				}
 		};
 
@@ -75,19 +73,27 @@ angular.
 
 			if (!$scope.$$phase) $scope.$apply();
 			var uuid = device.uuid;
+			var maxPlayers = parseInt(game.max, 10);
 			var gameObject = {
 				Creator_ID: uuid,
 				Event_ID: 1000 + 1 + $scope.numGames,
 				Lat: game.lat,
 				Lng: game.lng,
-				Max_Allowed: game.max,
+				Max_Allowed: maxPlayers,
 				RSVP_Count: 1,
 				Time: game.time,
 				Sport: game.sport
 			};
 			var newGame = new gamesData(gameObject);
 			newGame.save().then(function(){
-				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
+				var options = {
+					message: "New game created sucessfully!",
+					buttonLabel: "Close"
+				};
+
+			supersonic.ui.dialog.alert("Success!", options).then(function() {
+					supersonic.ui.modal.hide();
+				});
 			});
 			infowindow.close();
 			$scope.placeGame = true;
