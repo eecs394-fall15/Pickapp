@@ -4,7 +4,7 @@ angular.
 		$scope.rsvp = {};
 		var EventId=window.localStorage.getItem("event_id");
 		var rsvpData = supersonic.data.model('RSVPDetails');
-
+		var gameUpdate = supersonic.data.model('Game');
 
 	$scope.submitrsvp = function(rsvp)
 	{
@@ -29,6 +29,16 @@ angular.
 
 		});
 
+
+	var query = { "Event_ID" : EventId}
+		gameUpdate.findAll({query: JSON.stringify(query)}).then(function(games)
+		 {
+			supersonic.logger.log(query);
+			games[0].RSVP_Count += parseInt(rsvp.guest)+1;
+			 games.save().then(function(){
+supersonic.logger.log(EventId);
+			});
+		});
 	};
 
 
