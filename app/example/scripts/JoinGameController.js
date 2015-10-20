@@ -4,6 +4,10 @@ angular.
 		var gamesData = supersonic.data.model('Game');
 		var map;
 		var loadedGames;
+		console.log(device.cordova);
+		//var uuid = device.uuid;
+		//$scope.uuid = device.uuid;
+		//supersonic.logger.log(device.uuid);
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
 		$scope.loadedGames = [];
 		$scope.placeGame = false;
@@ -70,7 +74,8 @@ angular.
 					var currentLocation = currentGame.Lat + ", " + currentGame.Lng;
 					var currentSport = currentGame.Sport;
 					var currentTime = currentGame.Time;
-					//supersonic.logger.log(currentGame.Event_ID);
+					var uuid = device.uuid;
+
 					$scope.loadedGames.push({
 						Position : currentLocation,
 						Sport: currentSport,
@@ -78,6 +83,8 @@ angular.
 						Max : currentGame.Max_Allowed,
 						Count : currentGame.RSVP_Count,
 						Eventid : currentGame.Event_ID,
+						Creatorid : currentGame.Creator_ID,
+						Uuid : uuid,
 						MarkerID: i + 1
 
 					});

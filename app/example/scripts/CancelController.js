@@ -4,6 +4,9 @@ angular.
 		var EventId=window.localStorage.getItem("event_id");
 	var gameDelete = supersonic.data.model('Game');
 
+
+
+
 		$scope.submitcancel = function()
 		{
 

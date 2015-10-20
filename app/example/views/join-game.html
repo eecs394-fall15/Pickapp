@@ -23,14 +23,15 @@
           <div id="siteNotice">
           </div>
           <div id="bodyContent">
-            <p>
+            <br>
               <b>{{game.Sport}}</b> <br> {{game.Time}}<br>
               <b>Max Allowed </b>{{game.Max}}<br>
               <b>Total RSVPd </b>{{game.Count}}
+            </br>
             </p>
             <br>
             <button class="rsvpbutton" ng-click="rsvpevent(game.Eventid)">RSVP</button>
-            <button class="rsvpbutton" ng-click="cancelevent(game.Eventid)">Cancel Event</button>
+            <button ng-if="game.Creatorid == game.Uuid" class="rsvpbutton" ng-click="cancelevent(game.Eventid)">Cancel Event</button>
             </div>
           </div>
       </info-window>
