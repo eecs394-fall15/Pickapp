@@ -19,7 +19,10 @@ angular.
 			});
 			$scope.loadData();
 		});
-		$scope.getURL = function(sport) 
+		supersonic.ui.tabs.whenDidChange( function() {
+			$scope.loadData();
+		});
+		$scope.getURL = function(sport)
 		{
 			var url;
 			switch(sport) {
@@ -42,7 +45,7 @@ angular.
 			}
 
 			return url;
-			
+
 		};
 		$scope.rsvpevent = function(id)
 			{
@@ -106,10 +109,6 @@ angular.
 					$scope.game.lng = latLng.M.toString();
 					var contentString = "<div id='content'> <h2>Create new event</h2>" +
 						"<form novalidate class='simple-form'>" +
-						//" Time: <div class=input-group bootstrap-timepicker>'
-						//			<input id = 'timepicker1' type='text' class='form-control input-small'>
-					//				<span class='input-group-addon'><i class='glyphicon glyphicon-time'></i></span>
-					//			</div>" +
 						"  Time: <input ng-model='game.min'></input>" +
 						"Sport: <input ng-model='game.sport' class='sport-selector'> </input><br>" +
 						"  Min: <input ng-model='game.min' style='width: 10%;'></input>" +
@@ -129,7 +128,6 @@ angular.
 					}).focus(function() {
 						$(this).autocomplete("search", "");
 					});
-					// $('#timepicker1').`timepicker();
 				}
 		};
 		$scope.submitNewEvent = function(game){
@@ -146,7 +144,7 @@ angular.
 				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
 			});
 
-			
+
 		};
 		$scope.openSidebar = function(){
 			supersonic.ui.drawers.open('left').then( function(){
