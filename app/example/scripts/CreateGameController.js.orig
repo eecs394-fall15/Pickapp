@@ -2,13 +2,17 @@ angular.
 	module('example')
 	.controller('CreateGameController', function($scope, supersonic, $compile){
 		var gamesData = supersonic.data.model('Game');
+<<<<<<< HEAD
 		gamesData.findAll().then(function(games){$scope.numGames = games.length;});
 		var createMap;
+		console.log(device.cordova);
+=======
+		gamesData.findAll().then(function(games){$scope.numGames = games.length});
+		var map;
+>>>>>>> parent of 70d4592... Adding the device ID to game creationg
 		var loadedGames;
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
 		var markers = [];
-		var infowindow;
-		var marker;
 		$scope.placeGame = true;
 		$scope.$on('mapInitialized', function(evt, evtMap) {
 
@@ -30,7 +34,7 @@ angular.
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
 			if($scope.placeGame){
 					$scope.placeGame = false;
-					marker = new google.maps.Marker({
+					var marker = new google.maps.Marker({
 						position: latLng,
 						animation: google.maps.Animation.DROP,
 						map: createMap
@@ -48,7 +52,7 @@ angular.
 						"<input type='submit' ng-click='submitNewEvent(game)'></input>" +
 						"</form>";
 					var compiledContent = $compile(contentString)($scope);
-					infowindow = new google.maps.InfoWindow({
+					var infowindow = new google.maps.InfoWindow({
 						content: compiledContent[0]
 					});
 
@@ -66,7 +70,7 @@ angular.
 
 					google.maps.event.addListener(infowindow, 'closeclick', function(){
 						$scope.placeGame = true;
-						marker.setMap(null);
+						marker.setVisible(false);
 					});
 
 					marker.addListener('click', function(){
@@ -79,12 +83,17 @@ angular.
 		$scope.submitNewEvent = function(game){
 
 			if (!$scope.$$phase) $scope.$apply();
+<<<<<<< HEAD
 			var uuid = device.uuid;
 			var maxPlayers = parseInt(game.max, 10);
 			var eventid = (1000 + 1 + $scope.numGames).toString();
 			var gameObject = {
 				Creator_ID: uuid,
 				Event_ID: eventid,
+=======
+			var gameObject = {
+				Event_ID: 1000 + 1 + $scope.numGames,
+>>>>>>> parent of 70d4592... Adding the device ID to game creationg
 				Lat: game.lat,
 				Lng: game.lng,
 				Max_Allowed: maxPlayers,
@@ -103,9 +112,7 @@ angular.
 					supersonic.ui.modal.hide();
 				});
 			});
-			infowindow.close();
-			$scope.placeGame = true;
-			marker.setMap(null);
+			
 		};
 
 

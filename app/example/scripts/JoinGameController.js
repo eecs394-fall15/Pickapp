@@ -4,10 +4,6 @@ angular.
 		var gamesData = supersonic.data.model('Game');
 		var joinMap;
 		var loadedGames;
-		console.log(device.cordova);
-		//var uuid = device.uuid;
-		//$scope.uuid = device.uuid;
-		//supersonic.logger.log(device.uuid);
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
 		$scope.loadedGames = [];
 		$scope.placeGame = false;

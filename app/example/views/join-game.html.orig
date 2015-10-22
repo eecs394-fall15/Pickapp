@@ -1,0 +1,53 @@
+<div class="padding" ng-controller="JoinGameController">
+    <script>
+  document.addEventListener("touchmove", function(e){
+    e.preventDefault();
+  });
+</script>
+
+  <super-navbar>
+  <super-navbar-button ng-click="openSidebar()">
+    Settings
+    </super-navbar-button>
+	 <super-navbar-title>
+      PickApp
+    </super-navbar-title>
+  </super-navbar>
+
+
+
+  <map center="current-location" style="height: 100vh;" zoom="15" disable-default-u-i="true" zoom-control="true">
+    <marker ng-repeat="game in loadedGames" id="{{game.MarkerId}}" position="{{game.Position}}" on-click="showInfoWindow('myInfoWindow')" icon="{{getURL(game.Sport)}}"/>
+      <info-window id="myInfoWindow" max-width="200">
+        <div ng-non-bindable="">
+          <div id="siteNotice">
+          </div>
+          <div id="bodyContent">
+<<<<<<< HEAD
+            <br>
+              <b>{{game.Sport}}</b> <br> {{game.Time | date:'h:mma'}}<br>
+              <b>Max Allowed </b>{{game.Max}}<br>
+              <b>Total RSVPd </b>{{game.Count}}
+            </br>
+=======
+            <p>
+              <b>{{game.Sport}}</b> <br> {{game.Time}}<br>
+>>>>>>> parent of ae8363b... Added rsvp count and maximum allowed to info window
+            </p>
+            <br>
+            <button class="rsvpbutton" ng-click="rsvpevent(game.Eventid)">RSVP</button>
+            <button ng-if="game.Creatorid == game.Uuid" class="rsvpbutton" ng-click="cancelevent(game.Eventid)">Cancel Event</button>
+            </div>
+          </div>
+      </info-window>
+    </marker>
+  </map>
+
+  <!-- <div class="onoffswitch" style="float: right;"> -->
+      <!-- <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ng-model="placeGame"> -->
+      <!-- <label class="onoffswitch-label" for="myonoffswitch"></label> -->
+  <!-- </div> -->
+
+
+
+</div>
