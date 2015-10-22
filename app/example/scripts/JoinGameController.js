@@ -2,7 +2,7 @@ angular.
 	module('example')
 	.controller('JoinGameController', function($scope, supersonic, $compile){
 		var gamesData = supersonic.data.model('Game');
-		var map;
+		var joinMap;
 		var loadedGames;
 		console.log(device.cordova);
 		//var uuid = device.uuid;
@@ -12,10 +12,10 @@ angular.
 		$scope.loadedGames = [];
 		$scope.placeGame = false;
 		$scope.$on('mapInitialized', function(evt, evtMap) {
-			map = evtMap;
-			map.panTo(testLocation);
-			map.addListener('click', function(e) {
-				$scope.placeMarkerAndPanTo(e.latLng, map);
+			joinMap = evtMap;
+			joinMap.panTo(testLocation);
+			joinMap.addListener('click', function(e) {
+				$scope.placeMarkerAndPanTo(e.latLng, joinMap);
 			});
 			$scope.loadData();
 		});
@@ -101,9 +101,9 @@ angular.
 					var marker = new google.maps.Marker({
 						position: latLng,
 						animation: google.maps.Animation.DROP,
-						map: map
+						map: joinMap
 					});
-					map.panTo(latLng);
+					joinMap.panTo(latLng);
 					$scope.game = {};
 					$scope.game.lat = latLng.J.toString();
 					$scope.game.lng = latLng.M.toString();
@@ -120,7 +120,7 @@ angular.
 						content: compiledContent[0]
 					});
 					var Sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee'];
-					infowindow.open(map, marker);
+					infowindow.open(joinMap, marker);
 					$('.sport-selector').autocomplete({
 						source: Sports,
 						minLength: 0,

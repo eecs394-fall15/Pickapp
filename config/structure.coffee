@@ -6,7 +6,7 @@ module.exports =
   tabs: [
     {
       title: "Join Game"
-      id: "pick game"
+      id: "pick-game"
       location: "example#join-game" # Supersonic module#view type navigation
     }
 

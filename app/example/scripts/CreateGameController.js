@@ -3,7 +3,7 @@ angular.
 	.controller('CreateGameController', function($scope, supersonic, $compile){
 		var gamesData = supersonic.data.model('Game');
 		gamesData.findAll().then(function(games){$scope.numGames = games.length;});
-		var map;
+		var createMap;
 		console.log(device.cordova);
 		var loadedGames;
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
@@ -12,11 +12,19 @@ angular.
 		var marker;
 		$scope.placeGame = true;
 		$scope.$on('mapInitialized', function(evt, evtMap) {
-			map = evtMap;
-			map.panTo(testLocation);
-			map.addListener('click', function(e) {
-				$scope.placeMarkerAndPanTo(e.latLng, map);
+
+
+			createMap = evtMap;
+
+			createMap.panTo(testLocation);
+			createMap.addListener('click', function(e) {
+				$scope.placeMarkerAndPanTo(e.latLng, createMap);
 			});
+		});
+
+		supersonic.ui.tabs.whenDidChange( function() {
+			google.maps.event.trigger(createMap, 'resize');
+			createMap.setZoom( createMap.getZoom() );
 		});
 
 
@@ -26,10 +34,10 @@ angular.
 					marker = new google.maps.Marker({
 						position: latLng,
 						animation: google.maps.Animation.DROP,
-						map: map
+						map: createMap
 					});
 
-					map.panTo(latLng);
+					createMap.panTo(latLng);
 					$scope.game = {};
 					$scope.game.lat = latLng.lat();
 					$scope.game.lng = latLng.lng();
@@ -48,7 +56,7 @@ angular.
 
 
 					var Sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee'];
-					infowindow.open(map, marker);
+					infowindow.open(createMap, marker);
 					$('.sport-selector').autocomplete({
 						source: Sports,
 						minLength: 0,
@@ -63,7 +71,7 @@ angular.
 					});
 
 					marker.addListener('click', function(){
-						infowindow.open(map, marker);
+						infowindow.open(createMap, marker);
 					});
 				}
 		};
