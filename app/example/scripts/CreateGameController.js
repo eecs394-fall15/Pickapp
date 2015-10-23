@@ -82,9 +82,10 @@ angular.
 			var uuid = device.uuid;
 			var maxPlayers = parseInt(game.max, 10);
 			var eventid = (1000 + 1 + $scope.numGames).toString();
+			var eventnum = (Math.floor(Math.random() * 100000));
 			var gameObject = {
 				Creator_ID: uuid,
-				Event_ID: eventid,
+				Event_ID: eventnum,
 				Lat: game.lat,
 				Lng: game.lng,
 				Max_Allowed: maxPlayers,
