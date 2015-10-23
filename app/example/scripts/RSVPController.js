@@ -14,20 +14,6 @@ angular.
 			Phone_No: parseInt(rsvp.phone),
 			Comments: rsvp.comment
 		};
-		var RsvpDet = new rsvpData(rsvpObject);
-		RsvpDet.save().then(function(){
-			var options = {
-				message: "You have RSVPd Successfully",
-				buttonLabel: "Close"
-			};
-
-			supersonic.ui.dialog.alert("Success!", options).then(function() {
-				supersonic.ui.modal.hide();
-			});
-
-
-
-		});
 
 
 	var query = { "Event_ID" : EventId}
@@ -35,9 +21,50 @@ angular.
 		 {
 			supersonic.logger.log(query);
 			games[0].RSVP_Count += parseInt(rsvp.guest)+1;
-			 games.save().then(function(){
-supersonic.logger.log(EventId);
-			});
+
+			 if((games[0].RSVP_Count < games[0].Max_Allowed))
+			 {
+				 var RsvpDet = new rsvpData(rsvpObject);
+				 RsvpDet.save().then(function(){
+					 var options = {
+						 message: "You have RSVPd Successfully",
+						 buttonLabel: "Close"
+					 };
+
+					 supersonic.ui.dialog.alert("Success!", options).then(function() {
+						 supersonic.ui.modal.hide();
+					 });
+
+
+
+				 });
+
+
+
+				 games.save().then(function(){
+					 supersonic.logger.log(EventId);
+				 });
+
+
+			 }
+
+
+			 else
+			 {
+
+				 var options = {
+					 message: "Total RSVPd Crosses Maximum Players",
+					 buttonLabel: "Close"
+				 };
+
+				 supersonic.ui.dialog.alert("Oopssss!", options).then(function() {
+					 supersonic.ui.modal.hide();
+				 });
+
+			 }
+
+
+
 		});
 	};
 
