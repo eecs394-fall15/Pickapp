@@ -26,7 +26,10 @@ angular.
 			createMap.setZoom( createMap.getZoom() );
 		});
 
-
+		supersonic.ui.tabs.whenDidChange( function() {
+			$scope.placeGame = true;
+			marker.setMap(null);
+		});
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
 			if($scope.placeGame){
 					$scope.placeGame = false;
