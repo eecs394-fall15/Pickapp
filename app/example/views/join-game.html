@@ -30,8 +30,8 @@
             </br>
             </p>
             <br>
-            <button class="button button-full button-positive" ng-click="rsvpevent(game.Eventid)">RSVP</button>
-            <button ng-if="game.Creatorid == game.Uuid" class="rsvpbutton" ng-click="cancelevent(game.Eventid)">Cancel Event</button>
+            <button class="button button-full button-balanced" ng-click="rsvpevent(game.Eventid)" style="border-radius: 10px">RSVP</button>
+            <button ng-if="game.Creatorid == game.Uuid" class="button button-full button-assertive" ng-click="cancelevent(game.Eventid)" style="border-radius: 10px">Cancel Event</button>
             </div>
           </div>
       </info-window>
