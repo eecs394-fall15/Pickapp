@@ -43,54 +43,72 @@ angular.
 					$scope.game = {};
 					$scope.game.lat = latLng.lat();
 					$scope.game.lng = latLng.lng();
-					var contentString = "<div id='content'> <h2>Create new event</h2>" +
-						"<form novalidate class='simple-form'>" +
-						"   Time: <input type='time' ng-model='game.time' placeholder='HH:mm:ss' required></input><br>" +
-						"   Sport: <select ng-model='game.sport' required>"+
-									"<option value='baseball'>Baseball</option>" +
-									"<option value='basketball'>Basketball</option>" +
-									"<option value='football'>Football</option>" +
-									"<option value='frisbee'>Frisbee</option>" +
-									"<option value='golf'>Golf</option>" +
-									"<option value='soccer'>Soccer</option>" +
-									"<option value='tennis'>Tennis</option>" +
-									"<option value='volleyball'>Volleyball</option>" +
-									"<option value='other'>Other</option>" +
-								 "</select><br>" +
-						"   Max Players: <select ng-model='game.max' required>" + 
-											"<option value=1>1</option>" +
-											"<option value=2>2</option>" +
-											"<option value=3>3</option>" +
-											"<option value=4>4</option>" +
-											"<option value=5>5</option>" +
-											"<option value=6>6</option>" +
-											"<option value=7>7</option>" +
-											"<option value=8>8</option>" +
-											"<option value=9>9</option>" +
-											"<option value=10>10</option>" +
-											"<option value=11>11</option>" +
-											"<option value=12>12</option>" +
-											"<option value=13>13</option>" +
-											"<option value=14>14</option>" +
-											"<option value=15>15</option>" +
-											"<option value=16>16</option>" +
-											"<option value=17>17</option>" +
-											"<option value=18>18</option>" +
-											"<option value=19>19</option>" +
-											"<option value=20>20</option>" +
-											"<option value=21>21</option>" +
-											"<option value=22>22</option>" +
-											"<option value=23>23</option>" +
-											"<option value=24>24</option>" +
-											"<option value=25>25</option>" +
-											"<option value=26>26</option>" +
-											"<option value=27>27</option>" +
-											"<option value=28>28</option>" +
-											"<option value=29>29</option>" +
-											"<option value=30>30</option>" +
-										 "</select><br>" +
-						"<input type='submit' ng-click='submitNewEvent(game)'></input><br><br>" +
-						"</form>";
+					var contentString = "<div id='content'> <h2>Create Event</h2>" +
+						"<table style='width:100%'>"+
+							"<tr>"+
+								"<td>    Time: </td>" + 
+								"<td> <form novalidate class='simple-form'> <input type='time' ng-model='game.time' placeholder='HH:mm:ss' style='width: 125px; height: 20px; border: solid 1px #dcdcdc; transition: box-shadow .3s, border .3s;'  required></input> </form> </td>" +
+							"</tr>"+
+							"<tr>"+
+								"<td>    Sport: </td>" + 
+								"<td>" +
+									"<form novalidate class='simple-form'>" + 
+										"<select ng-model='game.sport' style='width: 125px; height: 20px; border: solid 1px #dcdcdc; transition: box-shadow .3s, border .3s;' required>"+
+										"<option value='baseball'>Baseball</option>" +
+										"<option value='basketball'>Basketball</option>" +
+										"<option value='football'>Football</option>" +
+										"<option value='frisbee'>Frisbee</option>" +
+										"<option value='golf'>Golf</option>" +
+										"<option value='soccer'>Soccer</option>" +
+										"<option value='tennis'>Tennis</option>" +
+										"<option value='volleyball'>Volleyball</option>" +
+										"<option value='other'>Other</option>" +
+										 "</select>" +
+									"</form>" +
+								"</td>" +
+							"</tr>"+
+							"<tr>"+
+								"<td>    Max Players: </td>" + 
+								"<td>" +
+									"<form novalidate class='simple-form'>" + 
+										"<select ng-model='game.max' style='width: 125px; height: 20px; border: solid 1px #dcdcdc; transition: box-shadow .3s, border .3s;' required>" + 
+												"<option value=1>1</option>" +
+												"<option value=2>2</option>" +
+												"<option value=3>3</option>" +
+												"<option value=4>4</option>" +
+												"<option value=5>5</option>" +
+												"<option value=6>6</option>" +
+												"<option value=7>7</option>" +
+												"<option value=8>8</option>" +
+												"<option value=9>9</option>" +
+												"<option value=10>10</option>" +
+												"<option value=11>11</option>" +
+												"<option value=12>12</option>" +
+												"<option value=13>13</option>" +
+												"<option value=14>14</option>" +
+												"<option value=15>15</option>" +
+												"<option value=16>16</option>" +
+												"<option value=17>17</option>" +
+												"<option value=18>18</option>" +
+												"<option value=19>19</option>" +
+												"<option value=20>20</option>" +
+												"<option value=21>21</option>" +
+												"<option value=22>22</option>" +
+												"<option value=23>23</option>" +
+												"<option value=24>24</option>" +
+												"<option value=25>25</option>" +
+												"<option value=26>26</option>" +
+												"<option value=27>27</option>" +
+												"<option value=28>28</option>" +
+												"<option value=29>29</option>" +
+												"<option value=30>30</option>" +
+											 "</select>"+
+									"</form>" +
+								"</td>" +
+							"</tr>"+
+						"</table>"+
+						"<button class='button button-full button-balanced' ng-click='submitNewEvent(game)' style='border-radius: 10px'>Submit</button></div>"
+						;
 					var compiledContent = $compile(contentString)($scope);
 					infowindow = new google.maps.InfoWindow({
 						content: compiledContent[0]
