@@ -116,7 +116,6 @@ angular.
 
 		$scope.openSidebar = function(){
 			supersonic.ui.drawers.open('left').then( function(){
-				console.log('Opened drawers');
 			});
 		};
 	});
