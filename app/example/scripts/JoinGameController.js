@@ -6,7 +6,11 @@ angular.
 		var loadedGames;
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
 		$scope.loadedGames = [];
+		$scope.displayedGames = [];
+		$scope.sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee'];
+		$scope.sportsFilters = [0, 0, 0, 0];
 		$scope.placeGame = false;
+
 		$scope.$on('mapInitialized', function(evt, evtMap) {
 			joinMap = evtMap;
 			joinMap.panTo(testLocation);
@@ -15,9 +19,15 @@ angular.
 			});
 			$scope.loadData();
 		});
+
 		supersonic.ui.tabs.whenDidChange( function() {
 			$scope.loadData();
 		});
+
+		supersonic.ui.drawers.whenWillClose(function() {
+			$scope.createFilters();
+		});
+
 		$scope.getURL = function(sport)
 		{
 			var url;
@@ -72,6 +82,12 @@ angular.
 					var currentGame = games[i];
 					var currentLocation = currentGame.Lat + ", " + currentGame.Lng;
 					var currentSport = currentGame.Sport;
+
+					//Code to pull all of the sports in the list so you can filter by those
+					// if(!($scope.sports.includes(currentSport))){
+					// 	$scope.sports.push(currentSport);
+					// }
+
 					var currentTime = currentGame.Time;
 					var uuid = device.uuid;
 
@@ -90,6 +106,35 @@ angular.
 				}
 				$scope.$apply();
 			});
+
+		};
+
+		$scope.createFilters = function(){
+			var filters = {Sport: []};
+			for(var i = 0; i < $scope.Sports.length; i++){
+				if($scope.sportsFilters[i] == 1){
+					filters.Sport.push($scope.Sports[i]);
+				}
+			}
+			$scope.filterData(filters);
+		};
+
+		$scope.filterData = function(filters)
+		{
+			//Data must be in format {Sport: ['sport1', 'sport2'], Time: startTime, User: 'UserID'}
+			var sports = filters.Sport;
+			supersonic.logger.log(sports);
+			//First filter by sport
+			if(sports.length === 0){
+				$scope.displayedGames = $scope.loadedGames;
+			} else{
+				for(var i = 0; i < $scope.loadedGames.length; i++){
+					game = $scope.loadedGames[i];
+					if(sports.includes(game[key])){
+						$scope.displayedGames.push(game);
+					}
+				}
+			}
 		};
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
 			if($scope.placeGame){
@@ -144,7 +189,6 @@ angular.
 		};
 		$scope.openSidebar = function(){
 			supersonic.ui.drawers.open('left').then( function(){
-				console.log('Opened drawers');
 			});
 		};
 	});
