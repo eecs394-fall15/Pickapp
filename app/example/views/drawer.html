@@ -3,12 +3,15 @@
     e.preventDefault();
   });
 </script>
-<ul class="list" ng-controller='JoinGameController'>
-  <li class="item" onclick="supersonic.ui.drawers.close()">Home</li>
+<ul class="list" ng-controller='DrawerController'>
   <li class="item">Filter by sport:</li>
-  <li class="item" ng-repeat="sport in sports track by $index" onclick="createFilters()">
+  <li class="item" ng-repeat="sport in sports track by $index">
     <label>{{sport}}:
-       <input type="checkbox" ng-model="sportsFilters[$index]">
+       <input class="sports-filter" type="checkbox" ng-model="sportsFilters[$index]">
      </label>
+  </li>
+  <li class="item">
+    <button ng-click="submitFilters()" class="button button-full button-balanced">Filter Games</button>
+    <button ng-click="resetFilters()" class="button button-full button-assertive">Reset Filters</button>
   </li>
 </ul>

@@ -8,23 +8,17 @@ angular.
 		$scope.loadedGames = [];
 		$scope.displayedGames = [];
 		$scope.sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee', 'Baseball', 'Golf', 'Tennis', 'Volleyball'];
-		$scope.sportsFilters = [0, 0, 0, 0];
+		$scope.sportsFilters = [0, 0, 0, 0, 0, 0, 0, 0];
 		$scope.placeGame = false;
 
 		$scope.$on('mapInitialized', function(evt, evtMap) {
 			joinMap = evtMap;
 			joinMap.panTo(testLocation);
-			joinMap.addListener('click', function(e) {
-				$scope.placeMarkerAndPanTo(e.latLng, joinMap);
-			});
 			$scope.loadData();
 		});
 
 		supersonic.ui.tabs.whenDidChange( function() {
 			$scope.loadData();
-		});
-
-		supersonic.ui.drawers.whenWillClose(function() {
 			$scope.createFilters();
 		});
 
@@ -104,16 +98,22 @@ angular.
 
 					});
 				}
+				$scope.displayedGames = $scope.loadedGames;
 				$scope.$apply();
 			});
 
 		};
 
+		supersonic.data.channel('filters').subscribe( function(message) {
+			$scope.sportsFilters = message;
+			$scope.createFilters();
+		});
+
 		$scope.createFilters = function(){
 			var filters = {Sport: []};
-			for(var i = 0; i < $scope.Sports.length; i++){
-				if($scope.sportsFilters[i] == 1){
-					filters.Sport.push($scope.Sports[i]);
+			for(var i = 0; i < $scope.sports.length; i++){
+				if($scope.sportsFilters[i]){
+					filters.Sport.push($scope.sports[i]);
 				}
 			}
 			$scope.filterData(filters);
@@ -122,73 +122,22 @@ angular.
 		$scope.filterData = function(filters)
 		{
 			//Data must be in format {Sport: ['sport1', 'sport2'], Time: startTime, User: 'UserID'}
-			var sports = filters.Sport;
-			supersonic.logger.log(sports);
+			var sports = filters.Sport,
+				now = new Date();
+			$scope.displayedGames = $scope.loadedGames;
 			//First filter by sport
-			if(sports.length === 0){
-				$scope.displayedGames = $scope.loadedGames;
-			} else{
+			if(sports.length){ //If there are any filters selected
+				$scope.displayedGames = [];
 				for(var i = 0; i < $scope.loadedGames.length; i++){
 					game = $scope.loadedGames[i];
-					if(sports.includes(game[key])){
+					if(sports.includes(game.Sport)){
 						$scope.displayedGames.push(game);
 					}
 				}
 			}
-		};
-		$scope.placeMarkerAndPanTo = function(latLng, map) {
-			if($scope.placeGame){
-					$scope.placeGame = false;
-					var marker = new google.maps.Marker({
-						position: latLng,
-						animation: google.maps.Animation.DROP,
-						map: joinMap
-					});
-					joinMap.panTo(latLng);
-					$scope.game = {};
-					$scope.game.lat = latLng.J.toString();
-					$scope.game.lng = latLng.M.toString();
-					var contentString = "<div id='content'> <h2>Create new event</h2>" +
-						"<form novalidate class='simple-form'>" +
-						"  Time: <input ng-model='game.min'></input>" +
-						"Sport: <input ng-model='game.sport' class='sport-selector'> </input><br>" +
-						"  Min: <input ng-model='game.min' style='width: 10%;'></input>" +
-						"  Max: <input ng-model='game.max' style='width: 10%;'></input><br><br>" +
-						"<input type='submit' ng-click='submitNewEvent(game)'></button>" +
-						"</form>";
-					var compiledContent = $compile(contentString)($scope);
-					var infowindow = new google.maps.InfoWindow({
-						content: compiledContent[0]
-					});
-					var Sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee'];
-					infowindow.open(joinMap, marker);
-					$('.sport-selector').autocomplete({
-						source: Sports,
-						minLength: 0,
-						scroll: true
-					}).focus(function() {
-						$(this).autocomplete("search", "");
-					});
-				}
-		};
-		$scope.submitNewEvent = function(game){
-
-			if (!$scope.$$phase) $scope.$apply();
-			var gameObject = {
-				Lat: game.lat,
-				Lng: game.lng,
-				Time: game.time,
-				Sport: game.sport
-			};
-			var newGame = new gamesData(gameObject);
-			newGame.save().then(function(){
-				console.log('Created new game with values: sport ' + game.sport + 'time ' + game.time);
-			});
-
-
+			$scope.$apply();
 		};
 		$scope.openSidebar = function(){
-			supersonic.ui.drawers.open('left').then( function(){
-			});
+			supersonic.ui.drawers.open('left');
 		};
 	});

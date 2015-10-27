@@ -6,6 +6,7 @@ angular.
 		var createMap;
 		var loadedGames;
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
+		$scope.sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee', 'Baseball', 'Golf', 'Tennis', 'Volleyball'];
 		var markers = [];
 		var infowindow;
 		var marker;
@@ -24,12 +25,10 @@ angular.
 		supersonic.ui.tabs.whenDidChange( function() {
 			google.maps.event.trigger(createMap, 'resize');
 			createMap.setZoom( createMap.getZoom() );
-		});
-
-		supersonic.ui.tabs.whenDidChange( function() {
 			$scope.placeGame = true;
 			marker.setMap(null);
 		});
+
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
 			if($scope.placeGame){
 					$scope.placeGame = false;
