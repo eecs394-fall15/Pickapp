@@ -28,19 +28,32 @@ angular.
 		$scope.getURL = function(sport)
 		{
 			var url;
+			sport = sport.toLowerCase();
 			switch(sport) {
-				case "Ultimate Frisbee":
-				case "Frisbee":
+				case "ultimate frisbee":
+				case "frisbee":
 					url = "/icons/frisbee.png";
 					break;
-				case "Soccer":
+				case "soccer":
 					url = "/icons/soccer.png";
 					break;
-				case "Football":
+				case "football":
 					url = "/icons/football.png";
 					break;
-				case "Basketball":
+				case "basketball":
 					url = "/icons/basketball.png";
+					break;
+				case "baseball":
+					url = "/icons/baseball.png";
+					break;
+				case "golf":
+					url = "/icons/golf.png";
+					break;
+				case "tennis":
+					url = "/icons/tennis.png";
+					break;
+				case "volleyball":
+					url = "/icons/volleyball.png";
 					break;
 				default:
 					url = "/icons/default.png";

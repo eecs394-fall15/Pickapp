@@ -10,12 +10,15 @@ angular.
 		var markers = [];
 		var infowindow;
 		var marker;
+		var firstTime = true;
 		$scope.placeGame = true;
+
+
 		$scope.$on('mapInitialized', function(evt, evtMap) {
 
 
-			createMap = evtMap;
 
+			createMap = evtMap;
 			createMap.panTo(testLocation);
 			createMap.addListener('click', function(e) {
 				$scope.placeMarkerAndPanTo(e.latLng, createMap);
@@ -23,6 +26,18 @@ angular.
 		});
 
 		supersonic.ui.tabs.whenDidChange( function() {
+			if(firstTime){
+				firstTime = false;
+				var instructions = {
+					message: "Click on the map to create a game",
+					buttonLabel: "Got it!"
+				};
+
+				supersonic.ui.dialog.alert("Instructions", instructions).then(function() {
+					supersonic.ui.modal.hide();
+				});
+			}
+
 			$scope.placeGame = true;
 			marker.setMap(null);
 		});
