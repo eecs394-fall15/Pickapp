@@ -23,8 +23,6 @@ angular.
 		});
 
 		supersonic.ui.tabs.whenDidChange( function() {
-			google.maps.event.trigger(createMap, 'resize');
-			createMap.setZoom( createMap.getZoom() );
 			$scope.placeGame = true;
 			marker.setMap(null);
 		});
@@ -45,32 +43,32 @@ angular.
 					var contentString = "<div id='content'> <h2>Create Event</h2>" +
 						"<table style='width:100%'>"+
 							"<tr>"+
-								"<td>    Time: </td>" + 
+								"<td>    Time: </td>" +
 								"<td> <form novalidate class='simple-form'> <input type='time' ng-model='game.time' placeholder='HH:mm:ss' style='width: 125px; height: 20px; border: solid 1px #dcdcdc; transition: box-shadow .3s, border .3s;'  required></input> </form> </td>" +
 							"</tr>"+
 							"<tr>"+
-								"<td>    Sport: </td>" + 
+								"<td>    Sport: </td>" +
 								"<td>" +
-									"<form novalidate class='simple-form'>" + 
+									"<form novalidate class='simple-form'>" +
 										"<select ng-model='game.sport' style='width: 125px; height: 20px; border: solid 1px #dcdcdc; transition: box-shadow .3s, border .3s;' required>"+
-										"<option value='baseball'>Baseball</option>" +
-										"<option value='basketball'>Basketball</option>" +
-										"<option value='football'>Football</option>" +
-										"<option value='frisbee'>Frisbee</option>" +
-										"<option value='golf'>Golf</option>" +
-										"<option value='soccer'>Soccer</option>" +
-										"<option value='tennis'>Tennis</option>" +
-										"<option value='volleyball'>Volleyball</option>" +
+										"<option value='Baseball'>Baseball</option>" +
+										"<option value='Basketball'>Basketball</option>" +
+										"<option value='Football'>Football</option>" +
+										"<option value='Frisbee'>Frisbee</option>" +
+										"<option value='Golf'>Golf</option>" +
+										"<option value='Soccer'>Soccer</option>" +
+										"<option value='Tennis'>Tennis</option>" +
+										"<option value='Volleyball'>Volleyball</option>" +
 										"<option value='other'>Other</option>" +
 										 "</select>" +
 									"</form>" +
 								"</td>" +
 							"</tr>"+
 							"<tr>"+
-								"<td>    Max Players: </td>" + 
+								"<td>    Max Players: </td>" +
 								"<td>" +
-									"<form novalidate class='simple-form'>" + 
-										"<select ng-model='game.max' style='width: 125px; height: 20px; border: solid 1px #dcdcdc; transition: box-shadow .3s, border .3s;' required>" + 
+									"<form novalidate class='simple-form'>" +
+										"<select ng-model='game.max' style='width: 125px; height: 20px; border: solid 1px #dcdcdc; transition: box-shadow .3s, border .3s;' required>" +
 												"<option value=1>1</option>" +
 												"<option value=2>2</option>" +
 												"<option value=3>3</option>" +

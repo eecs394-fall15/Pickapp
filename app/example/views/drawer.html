@@ -4,7 +4,14 @@
   });
 </script>
 <ul class="list" ng-controller='DrawerController'>
-  <li class="item">Filter by sport:</li>
+  <li class="item user">
+    <label>My Created Games:
+       <input class="sports-filter" type="checkbox" ng-model="userGames">
+     </label>
+  </li>
+  <li class="item">
+    <h2>Filter by sport:</h2>
+  </li>
   <li class="item" ng-repeat="sport in sports track by $index">
     <label>{{sport}}:
        <input class="sports-filter" type="checkbox" ng-model="sportsFilters[$index]">

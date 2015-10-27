@@ -7,7 +7,7 @@
 
   <super-navbar>
   <super-navbar-button ng-click="openSidebar()">
-    Settings
+    Filters
     </super-navbar-button>
 	 <super-navbar-title>
       PickApp
@@ -31,7 +31,7 @@
             </p>
             <br>
             <button class="button button-full button-balanced" ng-click="rsvpevent(game.Eventid)" style="border-radius: 10px">RSVP</button>
-            <button ng-if="game.Creatorid == game.Uuid" class="button button-full button-assertive" ng-click="cancelevent(game.Eventid)" style="border-radius: 10px">Cancel Event</button>
+            <button ng-if="game.Creatorid == currentUUID" class="button button-full button-assertive" ng-click="cancelevent(game.Eventid)" style="border-radius: 10px">Cancel Event</button>
             </div>
           </div>
       </info-window>

@@ -3,13 +3,14 @@ angular.
 	.controller('JoinGameController', function($scope, supersonic, $compile){
 		var gamesData = supersonic.data.model('Game');
 		var joinMap;
-		var loadedGames;
+		var loadingGames = false; //Checking if the data is currently being loaded from the database.
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
 		$scope.loadedGames = [];
 		$scope.displayedGames = [];
 		$scope.sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee', 'Baseball', 'Golf', 'Tennis', 'Volleyball'];
 		$scope.sportsFilters = [0, 0, 0, 0, 0, 0, 0, 0];
 		$scope.placeGame = false;
+		$scope.currentUUID;
 
 		$scope.$on('mapInitialized', function(evt, evtMap) {
 			joinMap = evtMap;
@@ -18,8 +19,10 @@ angular.
 		});
 
 		supersonic.ui.tabs.whenDidChange( function() {
-			$scope.loadData();
-			$scope.createFilters();
+			if(!loadingGames){
+				loadingGames = true;
+				$scope.loadData();
+			}
 		});
 
 		$scope.getURL = function(sport)
@@ -71,19 +74,14 @@ angular.
 			var firstGame;
 			var contentWindows = [];
 			gamesData.findAll().then(function(games){
-				loadedGames = games;
+				$scope.loadedGames = [];
 				for (var i =0; i < games.length; i++){
 					var currentGame = games[i];
 					var currentLocation = currentGame.Lat + ", " + currentGame.Lng;
 					var currentSport = currentGame.Sport;
-
-					//Code to pull all of the sports in the list so you can filter by those
-					// if(!($scope.sports.includes(currentSport))){
-					// 	$scope.sports.push(currentSport);
-					// }
-
 					var currentTime = currentGame.Time;
-					var uuid = device.uuid;
+
+					$scope.currentUUID = device.uuid;
 
 					$scope.loadedGames.push({
 						Position : currentLocation,
@@ -93,19 +91,20 @@ angular.
 						Count : currentGame.RSVP_Count,
 						Eventid : currentGame.Event_ID,
 						Creatorid : currentGame.Creator_ID,
-						Uuid : uuid,
 						MarkerID: i + 1
 
 					});
 				}
 				$scope.displayedGames = $scope.loadedGames;
 				$scope.$apply();
+				loadingGames = false;
 			});
 
 		};
 
 		supersonic.data.channel('filters').subscribe( function(message) {
-			$scope.sportsFilters = message;
+			$scope.sportsFilters = message.sports;
+			$scope.userGames = message.userGames;
 			$scope.createFilters();
 		});
 
@@ -132,6 +131,14 @@ angular.
 					game = $scope.loadedGames[i];
 					if(sports.includes(game.Sport)){
 						$scope.displayedGames.push(game);
+					}
+				}
+			}
+			if($scope.userGames){
+				for (var j = 0; j < $scope.displayedGames.length; j++){
+					game = $scope.displayedGames[j];
+					if(game.Creator_ID !== device.uuid){
+						$scope.displayedGames.splice(j, 1);
 					}
 				}
 			}
