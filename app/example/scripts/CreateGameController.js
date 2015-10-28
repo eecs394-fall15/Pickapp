@@ -130,16 +130,7 @@ angular.
 
 
 
-					var Sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee'];
 					infowindow.open(createMap, marker);
-					$('.sport-selector').autocomplete({
-						source: Sports,
-						minLength: 0,
-						scroll: true
-					}).focus(function() {
-						$(this).autocomplete("search", "");
-					});
-
 					google.maps.event.addListener(infowindow, 'closeclick', function(){
 						$scope.placeGame = true;
 						marker.setMap(null);

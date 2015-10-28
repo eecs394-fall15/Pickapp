@@ -26,7 +26,7 @@ angular.
 		});
 
 		supersonic.ui.drawers.whenWillClose(function() {
-			$scope.createFilters();
+			// $scope.createFilters();
 		});
 
 		$scope.hasDatePassed =function(gametime, systemtime) {
@@ -83,14 +83,13 @@ angular.
 
 		supersonic.data.channel('refresh').subscribe(function(message)
 		{
-
 			$scope.loadData();
 		});
 
 
 		supersonic.data.channel('cancelevent').subscribe(function(message)
 		{
-supersonic.logger.log("test works");
+			supersonic.logger.log("test works");
 			$scope.loadData();
 		});
 
@@ -163,25 +162,33 @@ supersonic.logger.log("test works");
 		{
 			//Data must be in format {Sport: ['sport1', 'sport2'], Time: startTime, User: 'UserID'}
 			var sports = filters.Sport,
-				now = new Date();
-			$scope.displayedGames = $scope.loadedGames;
+				displayedGames = [],
+				tempGame;
+			$scope.displayedGames = [];
 			//First filter by sport
-			if(sports.length){ //If there are any filters selected
-				$scope.displayedGames = [];
-				for(var i = 0; i < $scope.loadedGames.length; i++){
-					game = $scope.loadedGames[i];
-					if(sports.includes(game.Sport)){
-						$scope.displayedGames.push(game);
+			if(sports.length || $scope.userGames){ //If there are any filters selected
+				if($scope.userGames){ //If they only want to show user games find only those games
+					for(var i = 0; i < $scope.loadedGames.length; i++){
+						tempGame = $scope.loadedGames[i];
+						if(tempGame.Creatorid == device.uuid){
+							displayedGames.push(tempGame);
+						}
 					}
+				} else { //set the displayed games equal to all loaded games
+					displayedGames = $scope.loadedGames;
 				}
-			}
-			if($scope.userGames){
-				for (var j = 0; j < $scope.displayedGames.length; j++){
-					game = $scope.displayedGames[j];
-					if(game.Creator_ID !== device.uuid){
-						$scope.displayedGames.splice(j, 1);
+				if(sports.length){ //If there are any sports filters
+					for(var j = 0; j < displayedGames.length; j++){
+						tempGame = displayedGames[j];
+						if(sports.includes(tempGame.Sport)){
+							$scope.displayedGames.push(tempGame);
+						}
 					}
+				} else { //If no sports filters
+					$scope.displayedGames = displayedGames;
 				}
+			} else{ //If there were no filters at all load all games
+				$scope.displayedGames = $scope.loadedGames;
 			}
 			$scope.$apply();
 		};
