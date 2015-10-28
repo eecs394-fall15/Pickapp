@@ -57,7 +57,7 @@ angular.
 					$scope.game = {};
 					$scope.game.lat = latLng.lat();
 					$scope.game.lng = latLng.lng();
-					var contentString = "<div id='content'> <h2>Create Event</h2>" +
+					var contentString = "<div id='content'> <h4>Create Event</h4>" +
 						"<table style='width:100%'>"+
 							"<tr>"+
 								"<td>    Time: </td>" +
@@ -122,7 +122,7 @@ angular.
 							"<tr>"+
 								"<td>Description: </td>"+
 						"</table>"+
-						"<textarea ng-model='game.description' rows='4' columns='40' style='border: solid 1px #dcdcdc; transition: box-shadow .3s, border .3s;' maxlength='105'></textarea>" +
+						"<textarea ng-model='game.description' rows='2' columns='40' style='border: solid 1px #dcdcdc; transition: box-shadow .3s, border .3s;' maxlength='105'></textarea>" +
 						"<button class='button button-full button-balanced' ng-click='submitNewEvent(game)' style='border-radius: 10px'>Submit</button></div>";
 					var compiledContent = $compile(contentString)($scope);
 					infowindow = new google.maps.InfoWindow({
