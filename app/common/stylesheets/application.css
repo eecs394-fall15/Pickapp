@@ -78,3 +78,6 @@
   .sport-selector {
     width: 40%;
   }
+.invalid-phone {
+    color: red;
+}

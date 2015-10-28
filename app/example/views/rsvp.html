@@ -24,13 +24,17 @@
 		  <option value="6">6</option>
     </select>
   </label>
-  <label class="item item-input">
-    <input ng-model="rsvp.phone"  type="text" placeholder="Phone Number">
+     <form name="myform">
+ <label class="item item-input">
+      <input ng-model="rsvp.phone" name="phNo" type="text" placeholder="Phone Number(xxx-xxx-xxxx)"  ng-pattern="/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/" />
   </label>
-  <label class="item item-input">
+         <span class="invalid-phone" ng-show="myform.phNo.$invalid" style="font-family: Calibri "><em>Invalid phone number</em></span>
+         <br>
+         <label class="item item-input">
     <textarea ng-model="rsvp.comment" placeholder="Comments if any"></textarea>
   </label>
-</div>
+     </form>
+ </div>
 <button ng-click="submitrsvp(rsvp)" class="button button-full button-balanced" style="border-radius: 10px"
         >Confirm</button>
 
