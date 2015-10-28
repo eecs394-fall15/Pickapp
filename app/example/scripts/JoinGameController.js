@@ -180,7 +180,7 @@ angular.
 				if(sports.length){ //If there are any sports filters
 					for(var j = 0; j < displayedGames.length; j++){
 						tempGame = displayedGames[j];
-						if(sports.includes(tempGame.Sport)){
+						if(sports.indexOf(tempGame.Sport) !== -1){
 							$scope.displayedGames.push(tempGame);
 						}
 					}
