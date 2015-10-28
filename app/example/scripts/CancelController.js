@@ -19,7 +19,9 @@ angular.
 							buttonLabel: "Close"
 						};
 						supersonic.ui.dialog.alert("Success!", options).then(function() {
-							supersonic.ui.modal.hide();
+							supersonic.data.channel('cancelevent').publish(true);
+							// var view = new supersonic.ui.View("example#join-game");
+							supersonic.ui.layers.pop();
 						});
 
 					});

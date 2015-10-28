@@ -86,6 +86,15 @@ angular.
 
 			$scope.loadData();
 		});
+
+
+		supersonic.data.channel('cancelevents').subscribe(function(message)
+		{
+
+			$scope.loadData();
+		});
+
+
 		$scope.cancelevent = function(id)
 		{
 			window.localStorage.setItem("event_id",id);
@@ -93,7 +102,7 @@ angular.
 			var options = {
 				animate: true
 			};
-			supersonic.ui.modal.show(modalView, options);
+			supersonic.ui.layers.push(modalView, options);
 		};
 
 		$scope.loadData = function()
