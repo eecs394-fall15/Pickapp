@@ -83,14 +83,14 @@ angular.
 
 		supersonic.data.channel('refresh').subscribe(function(message)
 		{
-
+			supersonic.logger.log("test works");
 			$scope.loadData();
 		});
 
 
-		supersonic.data.channel('cancelevents').subscribe(function(message)
+		supersonic.data.channel('cancelevent').subscribe(function(message)
 		{
-
+supersonic.logger.log("test works");
 			$scope.loadData();
 		});
 

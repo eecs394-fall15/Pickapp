@@ -34,7 +34,7 @@ angular.
 					 supersonic.ui.dialog.alert("Success!", options).then(function() {
 
 						 supersonic.data.channel('refresh').publish(true);
-						 // var view = new supersonic.ui.View("example#join-game");
+
 						 supersonic.ui.layers.pop();
 
 					 });
@@ -62,7 +62,8 @@ angular.
 				 };
 
 				 supersonic.ui.dialog.alert("Oopssss!", options).then(function() {
-					 supersonic.ui.modal.hide();
+
+					 supersonic.ui.layers.pop();
 				 });
 
 			 }

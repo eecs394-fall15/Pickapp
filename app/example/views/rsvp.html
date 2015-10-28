@@ -15,7 +15,7 @@
      No of Additional Guests
     </div>
 	<select ng-model="rsvp.guest" >
-      <option selected>0</option>
+      <option selected="selected">0</option>
       <option >1</option>
       <option>2</option>
 	   <option>3</option>
@@ -31,6 +31,6 @@
     <textarea ng-model="rsvp.comment" placeholder="Comments if any"></textarea>
   </label>
 </div>
-<button ng-click="submitrsvp(rsvp)">Confirm</button>
+<button ng-click="submitrsvp(rsvp)" class="button button-full button-balanced">Confirm</button>
 
 </div>
