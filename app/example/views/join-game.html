@@ -23,13 +23,10 @@
           <div id="siteNotice">
           </div>
           <div id="bodyContent">
-            <br>
-              <b>{{game.Sport}}</b> <br> {{game.Time | date:'h:mma'}}<br>
-              <b>Max Allowed </b>{{game.Max}}<br>
-              <b>Total RSVPd </b>{{game.Count}}
-            </br>
-            </p>
-            <br>
+            <b>{{game.Sport}}</b> <br> {{game.Time | date:'h:mma'}}<br>
+            <b>Max Allowed </b>{{game.Max}}<br>
+            <b>Total RSVPd </b>{{game.Count}}<br>
+            <b>Description </b>{{game.Description}}
             <button class="button button-full button-balanced" ng-click="rsvpevent(game.Eventid)" style="border-radius: 10px">RSVP</button>
             <button ng-if="game.Creatorid == game.Uuid" class="button button-full button-balanced" ng-click="cancelevent(game.Eventid)" style="border-radius: 10px">Cancel Event</button>
             </div>
