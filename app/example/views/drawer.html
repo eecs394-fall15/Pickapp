@@ -13,6 +13,7 @@
     <h2>Filter by sport:</h2>
   </li>
   <li class="item" ng-repeat="sport in sports track by $index">
+    <img src="{{getURL(sport)}}">
     <label>{{sport}}:
        <input class="sports-filter" type="checkbox" ng-model="sportsFilters[$index]">
      </label>
