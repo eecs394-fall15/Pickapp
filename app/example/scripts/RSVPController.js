@@ -23,7 +23,7 @@ angular.
 			supersonic.logger.log(query);
 			games[0].RSVP_Count += parseInt(rsvp.guest)+1;
 
-			 if((games[0].RSVP_Count < games[0].Max_Allowed))
+			 if((games[0].RSVP_Count <= games[0].Max_Allowed))
 			 {
 				 var RsvpDet = new rsvpData(rsvpObject);
 				 RsvpDet.save().then(function(){
