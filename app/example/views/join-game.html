@@ -17,8 +17,8 @@
 
 
   <map center="current-location" style="height: 100vh;" zoom="15" disable-default-u-i="true" zoom-control="true">
-    <marker ng-repeat="game in loadedGames" id="{{game.MarkerId}}" position="{{game.Position}}" on-click="showInfoWindow('myInfoWindow')" icon="{{getURL(game.Sport)}}"/>
-      <info-window id="myInfoWindow" max-width="200">
+    <marker ng-repeat="game in loadedGames" id="{{game.MarkerId}}" position="{{game.Position}}" on-click="showInfoWindow('myInfoWindow')" icon="{{getURL(game.Sport)}}" ng-if="hasDatePassed(game.Date1, game.SystemDate)"/>
+      <info-window id="myInfoWindow" max-width="200" min-height="500">
         <div ng-non-bindable="">
           <div id="siteNotice">
           </div>
@@ -31,7 +31,7 @@
             </p>
             <br>
             <button class="button button-full button-balanced" ng-click="rsvpevent(game.Eventid)" style="border-radius: 10px">RSVP</button>
-            <button ng-if="game.Creatorid == game.Uuid" class="button button-full button-assertive" ng-click="cancelevent(game.Eventid)" style="border-radius: 10px">Cancel Event</button>
+            <button ng-if="game.Creatorid == game.Uuid" class="button button-full button-balanced" ng-click="cancelevent(game.Eventid)" style="border-radius: 10px">Cancel Event</button>
             </div>
           </div>
       </info-window>

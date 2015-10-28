@@ -139,6 +139,12 @@ angular.
 
 
 		$scope.submitNewEvent = function(game){
+			supersonic.logger.log("in here");
+			var curtime=game.time;
+			supersonic.logger.log(curtime);
+			var curdate = new Date();
+			var datetime = new Date(curdate.getFullYear(), curdate.getMonth(), curdate.getDate(), curtime.getHours(), curtime.getMinutes(), curtime.getSeconds());
+			supersonic.logger.log(datetime);
 
 			if (!$scope.$$phase) $scope.$apply();
 			var uuid = device.uuid;
@@ -153,6 +159,7 @@ angular.
 				Max_Allowed: maxPlayers,
 				RSVP_Count: 1,
 				Time: game.time,
+				Date: datetime,
 				Sport: game.sport
 			};
 			var newGame = new gamesData(gameObject);

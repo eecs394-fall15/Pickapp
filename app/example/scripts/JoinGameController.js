@@ -28,6 +28,10 @@ angular.
 			$scope.createFilters();
 		});
 
+		$scope.hasDatePassed =function(gametime, systemtime) {
+			return gametime > systemtime;
+		};
+
 		$scope.getURL = function(sport)
 		{
 			var url;
@@ -71,7 +75,7 @@ angular.
 			};
 			supersonic.ui.modal.show(modalView, options);
 		};
-
+		//$scope.date = new Date();
 		$scope.loadData = function()
 		{
 			var firstGame;
@@ -82,25 +86,51 @@ angular.
 					var currentGame = games[i];
 					var currentLocation = currentGame.Lat + ", " + currentGame.Lng;
 					var currentSport = currentGame.Sport;
+/*					var curdate = new Date(2008, 1, 2);
+					var date = $scope.date;
+					var datetime = new Date(curdate.getFullYear(), curdate.getMonth(), curdate.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+					supersonic.logger.log(datetime);
+					supersonic.logger.log(datetime.toString().substring(0,10));*/
+			//var todaysDate = new Date(date.getUTCFullYear(), date.getUTCMonth(),date.getUTCDate());
+			//supersonic.logger.log(todaysDate);
+					//var nextdate = new Date(2007, 0, 1);
+					//supersonic.logger.log($scope.date.toString().substring(0,10));
+					//supersonic.logger.log(curdate);
+					//supersonic.logger.log(nextdate.getTime());
+					/*if (curdate > $scope.date) {
+
+						supersonic.logger.log("hi");
+					}
+					else {
+
+						supersonic.logger.log("bye");
+					}*/
+					
+					
 
 					//Code to pull all of the sports in the list so you can filter by those
 					// if(!($scope.sports.includes(currentSport))){
 					// 	$scope.sports.push(currentSport);
-					// }
-
+					// }''
+					//var curdate = currentGame.Date;
+					//supersonic.logger.log(currentGame.Date.toString());
 					var currentTime = currentGame.Time;
 					var uuid = device.uuid;
+					var systemdate = new Date();
 
 					$scope.loadedGames.push({
 						Position : currentLocation,
 						Sport: currentSport,
 						Time: currentTime,
+						Date1 : Date.parse(currentGame.Date),
 						Max : currentGame.Max_Allowed,
+						SystemDate : Date.parse(systemdate),
 						Count : currentGame.RSVP_Count,
 						Eventid : currentGame.Event_ID,
 						Creatorid : currentGame.Creator_ID,
 						Uuid : uuid,
 						MarkerID: i + 1
+
 
 					});
 				}
@@ -173,12 +203,14 @@ angular.
 		};
 		$scope.submitNewEvent = function(game){
 
+			
 			if (!$scope.$$phase) $scope.$apply();
 			var gameObject = {
 				Lat: game.lat,
 				Lng: game.lng,
 				Time: game.time,
-				Sport: game.sport
+				Sport: game.sport,
+				//Date: datetime
 			};
 			var newGame = new gamesData(gameObject);
 			newGame.save().then(function(){
