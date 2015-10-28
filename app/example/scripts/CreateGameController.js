@@ -6,7 +6,7 @@ angular.
 		var createMap;
 		var loadedGames;
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
-		$scope.sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee', 'Baseball', 'Golf', 'Tennis', 'Volleyball'];
+		$scope.sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee', 'Baseball', 'Tennis', 'Volleyball'];
 		var markers = [];
 		var infowindow;
 		var marker;
@@ -70,7 +70,6 @@ angular.
 											"<option value='Basketball'>Basketball</option>" +
 											"<option value='Football'>Football</option>" +
 											"<option value='Frisbee'>Frisbee</option>" +
-											"<option value='Golf'>Golf</option>" +
 											"<option value='Soccer'>Soccer</option>" +
 											"<option value='Tennis'>Tennis</option>" +
 											"<option value='Volleyball'>Volleyball</option>" +

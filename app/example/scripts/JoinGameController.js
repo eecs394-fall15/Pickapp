@@ -7,8 +7,8 @@ angular.
 		var testLocation = new google.maps.LatLng(42.053576, -87.672727);
 		$scope.loadedGames = [];
 		$scope.displayedGames = [];
-		$scope.sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee', 'Baseball', 'Golf', 'Tennis', 'Volleyball'];
-		$scope.sportsFilters = [0, 0, 0, 0, 0, 0, 0, 0];
+		$scope.sports = ['Basketball', 'Football', 'Soccer', 'Ultimate Frisbee', 'Baseball', 'Tennis', 'Volleyball'];
+		$scope.sportsFilters = [0, 0, 0, 0, 0, 0, 0];
 		$scope.placeGame = false;
 		$scope.currentUUID;
 
@@ -53,9 +53,6 @@ angular.
 					break;
 				case "baseball":
 					url = "/icons/baseball.png";
-					break;
-				case "golf":
-					url = "/icons/golf.png";
 					break;
 				case "tennis":
 					url = "/icons/tennis.png";
