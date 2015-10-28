@@ -34,12 +34,14 @@ angular.
 				};
 
 				supersonic.ui.dialog.alert("Instructions", instructions).then(function() {
-					supersonic.ui.modal.hide();
+
 				});
 			}
 
 			$scope.placeGame = true;
-			marker.setMap(null);
+			if(marker) {
+				marker.setMap(null);
+			}
 		});
 
 		$scope.placeMarkerAndPanTo = function(latLng, map) {
@@ -190,6 +192,7 @@ angular.
 			});
 			infowindow.close();
 			$scope.placeGame = true;
+
 			marker.setMap(null);
 		};
 
