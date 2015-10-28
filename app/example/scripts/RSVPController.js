@@ -2,6 +2,7 @@ angular.
 	module('example')
 	.controller('RSVPController', function($scope, supersonic, $compile){
 		$scope.rsvp = {};
+		$scope.rsvp.guest = 0;
 		var EventId=window.localStorage.getItem("event_id");
 		var rsvpData = supersonic.data.model('RSVPDetails');
 		var gameUpdate = supersonic.data.model('Game');
